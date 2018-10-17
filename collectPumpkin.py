@@ -1,5 +1,5 @@
 """
-Collect pumpkin can be treated as a sample of OEP-8 smart contract
+Collect pumpkin can be considered as a sample of OEP-8 smart contract
 """
 from boa.interop.System.Storage import GetContext, Get, Put, Delete
 from boa.interop.System.Runtime import CheckWitness, Notify
@@ -356,6 +356,12 @@ def transferFromMulti(args):
 
 
 def compound(acct):
+    """
+    Compound the first seven tokens into the precious (8-th) token,
+    the first seven tokens of acct will disappear and the precious tokens will be generated
+    :param acct:
+    :return:
+    """
     RequireWitness(acct)
     RequireScriptHash(acct)
     normalIndex = [0, 1, 2, 3, 4, 5, 6]
@@ -380,9 +386,9 @@ def compound(acct):
 
     preciousTokenID = TOKEN_ID_LIST[7]
 
-    preciousPumpkinSupply = totalSupply(preciousTokenID)
+    preciousTokenSupply = totalSupply(preciousTokenID)
 
-    Put(GetContext(), concatkey(preciousTokenID, TOTAL_SUPPLY), preciousPumpkinSupply + minValue)
+    Put(GetContext(), concatkey(preciousTokenID, TOTAL_SUPPLY), preciousTokenSupply + minValue)
 
     Put(GetContext(), concatkey(concatkey(preciousTokenID, BALANCE), acct), balanceOf(acct, preciousTokenID) + minValue)
 
@@ -404,7 +410,7 @@ def init():
     :return:
     '''
     if not Get(GetContext(), INITED) and CheckWitness(admin) == True:
-        tt = createMultiKindsPumpkin()
+        tt = createMultiTypeToken()
         if tt == True:
             Put(GetContext(), INITED, 'TRUE')
             return True
@@ -414,18 +420,17 @@ def init():
 
 
 
-def createMultiKindsPumpkin():
+def createMultiTypeToken():
     Index = [0, 1, 2, 3, 4, 5, 6, 7]
-    # pumpkinKindsID = [PUMPKIN_ID1, PUMPKIN_ID2, PUMPKIN_ID3,PUMPKIN_ID4, PUMPKIN_ID5, PUMPKIN_ID6, PUMPKIN_ID7, PUMPKIN_ID8]
-    pumpkinKindsName = ['name1', 'name2', 'name3', 'name4', 'name5', 'name6', 'name7', 'name8']
-    pumpkinKindsSymbol = ['PS1', 'PS2', 'PS3', 'PS4', 'PS5', 'PS6', 'PS7', 'PS8']
-    pumpkinKindsTotalSupply = [100, 200, 300, 400, 500, 600, 700, 0]
+    tokenNameList = ['name1', 'name2', 'name3', 'name4', 'name5', 'name6', 'name7', 'name8']
+    tokenSymbolList = ['PS1', 'PS2', 'PS3', 'PS4', 'PS5', 'PS6', 'PS7', 'PS8']
+    tokenSupplyList = [100, 200, 300, 400, 500, 600, 700, 0]
 
     for index in Index:
         # get name, symbol, totalsupply
-        tokenName = pumpkinKindsName[index]
-        tokenSymbol = pumpkinKindsSymbol[index]
-        tokenTotalSupply = pumpkinKindsTotalSupply[index]
+        tokenName = tokenNameList[index]
+        tokenSymbol = tokenSymbolList[index]
+        tokenTotalSupply = tokenSupplyList[index]
 
         tokenId = TOKEN_ID_LIST[index]
 
@@ -436,7 +441,7 @@ def createMultiKindsPumpkin():
         # initiate token totalSupply
         Put(GetContext(), concatkey(tokenId, TOTAL_SUPPLY), tokenTotalSupply)
 
-        # transfer all the pumpkin tokens to admin
+        # transfer all the tokens to admin
         Put(GetContext(), concatkey(concatkey(tokenId, BALANCE), admin), tokenTotalSupply)
 
         # Notify(['transfer', '', admin, tokenId, tokenTotalSupply])
