@@ -202,7 +202,7 @@ def balanceOf(acct, tokenId):
 
 def transfer(fromAcct, toAcct, tokenId, amount):
     """
-    transfer amount of tokens in terms of tokenPrefix token from fromAcct to the toAcct
+    transfer amount of tokens in terms of tokenId token from fromAcct to the toAcct
     :param fromAcct:
     :param toAcct:
     :param tokenId:
@@ -210,7 +210,7 @@ def transfer(fromAcct, toAcct, tokenId, amount):
     :return:
     """
     RequireWitness(fromAcct)
-    Require(checkTokenPrefix(tokenId))
+    Require(checkTokenId(tokenId))
     RequireScriptHash(fromAcct)
     RequireScriptHash(toAcct)
 
@@ -260,7 +260,7 @@ def approve(owner, spender, tokenId, amount):
     RequireWitness(owner)
     RequireScriptHash(owner)
     RequireScriptHash(spender)
-    Require(checkTokenPrefix(tokenId))
+    Require(checkTokenId(tokenId))
 
     ownerBalance = balanceOf(owner, tokenId)
     Require(ownerBalance >= amount)
@@ -310,7 +310,7 @@ def transferFrom(spender, fromAcct, toAcct, tokenId, amount):
     RequireScriptHash(spender)
     RequireScriptHash(fromAcct)
     RequireScriptHash(toAcct)
-    Require(checkTokenPrefix(tokenId))
+    Require(checkTokenId(tokenId))
 
     fromKey = concatkey(concatkey(tokenId, BALANCE), fromAcct)
     fromBalance = Get(GetContext(), fromKey)
@@ -444,9 +444,9 @@ def createMultiKindsPumpkin():
 
     return True
 
-def checkTokenPrefix(tokenPrefix):
-    # here we check if the tokenPrefix is legal with the help of getting its name
-    if Get(GetContext(), concatkey(tokenPrefix, NAME)):
+def checkTokenId(tokenId):
+    # here we check if the tokenId is legal with the help of getting its name
+    if Get(GetContext(), concatkey(tokenId, NAME)):
         return True
     else:
         return False
