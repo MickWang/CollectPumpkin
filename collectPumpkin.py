@@ -1,12 +1,65 @@
 """
-A sample of OEP5 smart contract
+Collect pumpkin can be treated as a sample of OEP-8 smart contract
 """
 from boa.interop.System.Storage import GetContext, Get, Put, Delete
-from boa.interop.System.Runtime import CheckWitness, GetTime, Notify, Serialize, Deserialize
-from boa.interop.System.ExecutionEngine import GetExecutingScriptHash
-from boa.builtins import ToScriptHash, sha256, concat
-from mycontracts.libs.SafeCheck import Require, RequireScriptHash, RequireWitness
-from boa.interop.System.Runtime import Serialize, Deserialize
+from boa.interop.System.Runtime import CheckWitness, Notify
+from boa.interop.System.Action import RegisterAction
+from boa.builtins import ToScriptHash, concat
+# from mycontracts.libs.SafeCheck import Require, RequireScriptHash, RequireWitness
+
+
+"""
+https://github.com/tonyclarking/python-template/blob/master/libs/Utils.py
+"""
+def Revert():
+    """
+    Revert the transaction. The opcodes of this function is `09f7f6f5f4f3f2f1f000f0`,
+    but it will be changed to `ffffffffffffffffffffff` since opcode THROW doesn't
+    work, so, revert by calling unused opcode.
+    """
+    raise Exception(0xF1F1F2F2F3F3F4F4)
+
+
+"""
+https://github.com/tonyclarking/python-template/blob/master/libs/SafeCheck.py
+"""
+def Require(condition):
+    """
+	If condition is not satisfied, return false
+	:param condition: required condition
+	:return: True or false
+	"""
+    if not condition:
+        Revert()
+    return True
+
+def RequireScriptHash(key):
+    """
+    Checks the bytearray parameter is script hash or not. Script Hash
+    length should be equal to 20.
+    :param key: bytearray parameter to check script hash format.
+    :return: True if script hash or revert the transaction.
+    """
+    Require(len(key) == 20)
+    return True
+
+def RequireWitness(witness):
+    """
+	Checks the transaction sender is equal to the witness. If not
+	satisfying, revert the transaction.
+	:param witness: required transaction sender
+	:return: True if transaction sender or revert the transaction.
+	"""
+    Require(CheckWitness(witness))
+    return True
+
+
+"""
+collect pumpkin smart contract
+"""
+
+TransferEvent = RegisterAction("transfer", "fromAcct", "toAcct", "tokenId", "amount")
+ApprovalEvent = RegisterAction("approval", "owner", "spender", "tokenId", "amount")
 
 # modify to the admin address
 admin = ToScriptHash('AQf4Mzu1YJrhz9f3aRkkwSm9n3qhXGSh4p')
@@ -20,6 +73,7 @@ admin = ToScriptHash('AQf4Mzu1YJrhz9f3aRkkwSm9n3qhXGSh4p')
 # TOKEN_ID6 = bytearray('b\x06')
 # TOKEN_ID7 = bytearray('b\x07')
 # TOKEN_ID8 = bytearray('b\x08')
+
 # TOKEN_ID_LIST = [TOKEN_ID1, TOKEN_ID2, TOKEN_ID3, TOKEN_ID4, TOKEN_ID5, TOKEN_ID6, TOKEN_ID7, TOKEN_ID8]
 TOKEN_ID_LIST = [b'\x01', b'\x02', b'\x03', b'\x04', b'\x05', b'\x06', b'\x07', b'\x08']
 
@@ -174,9 +228,8 @@ def transfer(fromAcct, toAcct, tokenId, amount):
     toBalance = Get(GetContext(), toKey)
     Put(GetContext(), toKey, toBalance + amount)
 
-    tokenName = Get(GetContext(), concatkey(tokenId, NAME))
-
-    Notify(['transfer', fromAcct, toAcct, tokenName, amount])
+    # Notify(["transfer", fromAcct, toAcct, tokenId, amount])
+    TransferEvent(fromAcct, toAcct, tokenId, amount)
 
     return True
 
@@ -215,9 +268,8 @@ def approve(owner, spender, tokenId, amount):
     key = concatkey(concatkey(concatkey(tokenId, APPROVE), owner), spender)
     Put(GetContext(), key, amount)
 
-    # tokenName = Get(GetContext(), concatkey(tokenId, NAME))
-
-    Notify(['approval', owner, spender, tokenId, amount])
+    # Notify(['approval', owner, spender, tokenId, amount])
+    ApprovalEvent(owner, spender, tokenId, amount)
 
     return True
 
@@ -283,7 +335,8 @@ def transferFrom(spender, fromAcct, toAcct, tokenId, amount):
 
     # tokenName = Get(GetContext(), concatkey(tokenId, NAME))
 
-    Notify(["transfer", fromAcct, toAcct, tokenId, amount])
+    # Notify(["transfer", fromAcct, toAcct, tokenId, amount])
+    TransferEvent(fromAcct, toAcct, tokenId, amount)
 
     return True
 
@@ -322,7 +375,8 @@ def compound(acct):
 
         # tokenName = Get(GetContext(), concatkey(TOKEN_ID_LIST[index], NAME))
 
-        Notify(["transfer", acct, '', TOKEN_ID_LIST[index], minValue])
+        # Notify(["transfer", acct, '', TOKEN_ID_LIST[index], minValue])
+        TransferEvent(acct, '', TOKEN_ID_LIST[index], minValue)
 
     preciousTokenID = TOKEN_ID_LIST[7]
 
@@ -334,7 +388,8 @@ def compound(acct):
 
     tokenName = Get(GetContext(), concatkey(preciousTokenID, NAME))
 
-    Notify(["transfer", '', acct, preciousTokenID, minValue])
+    # Notify(["transfer", '', acct, preciousTokenID, minValue])
+    TransferEvent('', acct, preciousTokenID, minValue)
 
     return True
 
@@ -348,15 +403,12 @@ def init():
     based on your requirements, initialize the tokens
     :return:
     '''
-    Notify(["111_init"])
     if not Get(GetContext(), INITED) and CheckWitness(admin) == True:
         tt = createMultiKindsPumpkin()
         if tt == True:
             Put(GetContext(), INITED, 'TRUE')
             return True
         raise Exception("init error")
-    else:
-        Notify(["222_init"])
 
     return False
 
@@ -387,7 +439,9 @@ def createMultiKindsPumpkin():
         # transfer all the pumpkin tokens to admin
         Put(GetContext(), concatkey(concatkey(tokenId, BALANCE), admin), tokenTotalSupply)
 
-        Notify(['transfer', '', admin, tokenId, tokenTotalSupply])
+        # Notify(['transfer', '', admin, tokenId, tokenTotalSupply])
+        TransferEvent('', admin, tokenId, tokenTotalSupply)
+
     return True
 
 def checkTokenPrefix(tokenPrefix):
