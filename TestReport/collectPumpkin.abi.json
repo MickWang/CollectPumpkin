@@ -1,0 +1,171 @@
+{
+    "CompilerVersion": "1.0.2",
+    "hash": "573fd77eafa31ecee3205a0dda036f985f8b4daf",
+    "entrypoint": "Main",
+    "functions": [
+        {
+            "name": "name",
+            "parameters": [
+                {
+                    "name": "tokenId",
+                    "type": ""
+                }
+            ]
+        },
+        {
+            "name": "symbol",
+            "parameters": [
+                {
+                    "name": "tokenId",
+                    "type": ""
+                }
+            ]
+        },
+        {
+            "name": "totalSupply",
+            "parameters": [
+                {
+                    "name": "tokenId",
+                    "type": ""
+                }
+            ]
+        },
+        {
+            "name": "balanceOf",
+            "parameters": [
+                {
+                    "name": "acct",
+                    "type": ""
+                },
+                {
+                    "name": "tokenId",
+                    "type": ""
+                }
+            ]
+        },
+        {
+            "name": "transfer",
+            "parameters": [
+                {
+                    "name": "fromAcct",
+                    "type": ""
+                },
+                {
+                    "name": "toAcct",
+                    "type": ""
+                },
+                {
+                    "name": "tokenId",
+                    "type": ""
+                },
+                {
+                    "name": "amount",
+                    "type": ""
+                }
+            ]
+        },
+        {
+            "name": "transferMulti",
+            "parameters": [
+                {
+                    "name": "args",
+                    "type": ""
+                }
+            ]
+        },
+        {
+            "name": "approve",
+            "parameters": [
+                {
+                    "name": "owner",
+                    "type": ""
+                },
+                {
+                    "name": "spender",
+                    "type": ""
+                },
+                {
+                    "name": "tokenId",
+                    "type": ""
+                },
+                {
+                    "name": "amount",
+                    "type": ""
+                }
+            ]
+        },
+        {
+            "name": "approveMulti",
+            "parameters": [
+                {
+                    "name": "args",
+                    "type": ""
+                }
+            ]
+        },
+        {
+            "name": "allowance",
+            "parameters": [
+                {
+                    "name": "owner",
+                    "type": ""
+                },
+                {
+                    "name": "spender",
+                    "type": ""
+                },
+                {
+                    "name": "tokenId",
+                    "type": ""
+                }
+            ]
+        },
+        {
+            "name": "transferFrom",
+            "parameters": [
+                {
+                    "name": "spender",
+                    "type": ""
+                },
+                {
+                    "name": "fromAcct",
+                    "type": ""
+                },
+                {
+                    "name": "toAcct",
+                    "type": ""
+                },
+                {
+                    "name": "tokenId",
+                    "type": ""
+                },
+                {
+                    "name": "amount",
+                    "type": ""
+                }
+            ]
+        },
+        {
+            "name": "transferFromMulti",
+            "parameters": [
+                {
+                    "name": "args",
+                    "type": ""
+                }
+            ]
+        },
+        {
+            "name": "compound",
+            "parameters": [
+                {
+                    "name": "acct",
+                    "type": ""
+                }
+            ]
+        },
+        {
+            "name": "init",
+            "parameters": []
+        }
+    ]
+}

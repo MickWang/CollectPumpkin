@@ -1,0 +1,369 @@
+{
+    "Functions": [
+        {
+            "Method": "checkTokenId",
+            "VarMap": {
+                "tokenId": 0,
+                "NAME": 1
+            }
+        },
+        {
+            "Method": "createMultiTypeToken",
+            "VarMap": {
+                "admin": 0,
+                "TOKEN_ID_LIST": 1,
+                "NAME": 2,
+                "SYMBOL": 3,
+                "BALANCE": 4,
+                "TOTAL_SUPPLY": 5,
+                "Index": 6,
+                "tokenNameList": 7,
+                "tokenSymbolList": 8,
+                "tokenSupplyList": 9,
+                "index": 10,
+                "tokenName": 11,
+                "tokenSymbol": 12,
+                "tokenTotalSupply": 13,
+                "tokenId": 14,
+                "forloop_counter_1": 15,
+                "forloop_length_1": 16
+            }
+        },
+        {
+            "Method": "init",
+            "VarMap": {
+                "admin": 0,
+                "INITED": 1,
+                "tt": 2
+            }
+        },
+        {
+            "Method": "concatkey",
+            "VarMap": {
+                "str1": 0,
+                "str2": 1
+            }
+        },
+        {
+            "Method": "compound",
+            "VarMap": {
+                "acct": 0,
+                "TOKEN_ID_LIST": 1,
+                "NAME": 2,
+                "BALANCE": 3,
+                "TOTAL_SUPPLY": 4,
+                "normalIndex": 5,
+                "normalBalances": 6,
+                "minValue": 7,
+                "index": 8,
+                "tmpBalance": 9,
+                "tmpKey": 10,
+                "preciousTokenID": 11,
+                "preciousTokenSupply": 12,
+                "tokenName": 13,
+                "forloop_counter_1": 14,
+                "forloop_length_1": 15,
+                "forloop_counter_2": 16,
+                "forloop_length_2": 17
+            }
+        },
+        {
+            "Method": "transferFromMulti",
+            "VarMap": {
+                "args": 0,
+                "p": 1,
+                "forloop_counter_1": 2,
+                "forloop_length_1": 3
+            }
+        },
+        {
+            "Method": "transferFrom",
+            "VarMap": {
+                "spender": 0,
+                "fromAcct": 1,
+                "toAcct": 2,
+                "tokenId": 3,
+                "amount": 4,
+                "BALANCE": 5,
+                "APPROVE": 6,
+                "fromKey": 7,
+                "fromBalance": 8,
+                "toKey": 9,
+                "toBalance": 10,
+                "approvedKey": 11,
+                "approvedAmount": 12
+            }
+        },
+        {
+            "Method": "allowance",
+            "VarMap": {
+                "owner": 0,
+                "spender": 1,
+                "tokenId": 2,
+                "APPROVE": 3,
+                "key": 4
+            }
+        },
+        {
+            "Method": "approveMulti",
+            "VarMap": {
+                "args": 0,
+                "p": 1,
+                "forloop_counter_1": 2,
+                "forloop_length_1": 3
+            }
+        },
+        {
+            "Method": "approve",
+            "VarMap": {
+                "owner": 0,
+                "spender": 1,
+                "tokenId": 2,
+                "amount": 3,
+                "APPROVE": 4,
+                "ownerBalance": 5,
+                "key": 6
+            }
+        },
+        {
+            "Method": "transferMulti",
+            "VarMap": {
+                "args": 0,
+                "p": 1,
+                "forloop_counter_1": 2,
+                "forloop_length_1": 3
+            }
+        },
+        {
+            "Method": "transfer",
+            "VarMap": {
+                "fromAcct": 0,
+                "toAcct": 1,
+                "tokenId": 2,
+                "amount": 3,
+                "BALANCE": 4,
+                "balanceKey": 5,
+                "fromKey": 6,
+                "fromBalance": 7,
+                "toKey": 8,
+                "toBalance": 9
+            }
+        },
+        {
+            "Method": "balanceOf",
+            "VarMap": {
+                "acct": 0,
+                "tokenId": 1,
+                "BALANCE": 2
+            }
+        },
+        {
+            "Method": "totalSupply",
+            "VarMap": {
+                "tokenId": 0,
+                "TOTAL_SUPPLY": 1
+            }
+        },
+        {
+            "Method": "symbol",
+            "VarMap": {
+                "tokenId": 0,
+                "SYMBOL": 1
+            }
+        },
+        {
+            "Method": "name",
+            "VarMap": {
+                "tokenId": 0,
+                "NAME": 1
+            }
+        },
+        {
+            "Method": "Main",
+            "VarMap": {
+                "operation": 0,
+                "args": 1,
+                "tokenId": 2,
+                "account": 3,
+                "fromAcct": 4,
+                "toAcct": 5,
+                "amount": 6,
+                "owner": 7,
+                "spender": 8
+            }
+        },
+        {
+            "Method": "RequireWitness",
+            "VarMap": {
+                "witness": 0
+            }
+        },
+        {
+            "Method": "RequireScriptHash",
+            "VarMap": {
+                "key": 0
+            }
+        },
+        {
+            "Method": "Require",
+            "VarMap": {
+                "condition": 0
+            }
+        },
+        {
+            "Method": "Revert",
+            "VarMap": {}
+        },
+        {
+            "Method": "breakpoint",
+            "VarMap": {}
+        },
+        {
+            "Method": "throw_if_null",
+            "VarMap": {
+                "item": 0
+            }
+        },
+        {
+            "Method": "verify_signature",
+            "VarMap": {
+                "pubkey": 0,
+                "signature": 1,
+                "message": 2
+            }
+        },
+        {
+            "Method": "hash256",
+            "VarMap": {
+                "data": 0
+            }
+        },
+        {
+            "Method": "hash160",
+            "VarMap": {
+                "data": 0
+            }
+        },
+        {
+            "Method": "sha256",
+            "VarMap": {
+                "data": 0
+            }
+        },
+        {
+            "Method": "sha1",
+            "VarMap": {
+                "data": 0
+            }
+        },
+        {
+            "Method": "range",
+            "VarMap": {
+                "start": 0,
+                "stop": 1,
+                "length": 2,
+                "out": 3,
+                "index": 4,
+                "orig_start": 5,
+                "val": 6
+            }
+        },
+        {
+            "Method": "take",
+            "VarMap": {
+                "source": 0,
+                "count": 1
+            }
+        },
+        {
+            "Method": "substr",
+            "VarMap": {
+                "source": 0,
+                "start_index": 1,
+                "count": 2
+            }
+        },
+        {
+            "Method": "concat",
+            "VarMap": {
+                "str1": 0,
+                "str2": 1
+            }
+        },
+        {
+            "Method": "RegisterAction",
+            "VarMap": {
+                "event_name": 0,
+                "args": 1
+            }
+        },
+        {
+            "Method": "Deserialize",
+            "VarMap": {
+                "item": 0
+            }
+        },
+        {
+            "Method": "Serialize",
+            "VarMap": {
+                "item": 0
+            }
+        },
+        {
+            "Method": "GetTime",
+            "VarMap": {}
+        },
+        {
+            "Method": "Notify",
+            "VarMap": {
+                "arg": 0
+            }
+        },
+        {
+            "Method": "Log",
+            "VarMap": {
+                "message": 0
+            }
+        },
+        {
+            "Method": "CheckWitness",
+            "VarMap": {
+                "hash_or_pubkey": 0
+            }
+        },
+        {
+            "Method": "GetTrigger",
+            "VarMap": {}
+        },
+        {
+            "Method": "Delete",
+            "VarMap": {
+                "context": 0,
+                "key": 1
+            }
+        },
+        {
+            "Method": "Put",
+            "VarMap": {
+                "context": 0,
+                "key": 1,
+                "value": 2
+            }
+        },
+        {
+            "Method": "Get",
+            "VarMap": {
+                "context": 0,
+                "key": 1
+            }
+        },
+        {
+            "Method": "GetReadOnlyContext",
+            "VarMap": {}
+        },
+        {
+            "Method": "GetContext",
+            "VarMap": {}
+        }
+    ]
+}
