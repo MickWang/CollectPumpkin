@@ -326,7 +326,7 @@ def transferFrom(spender, fromAcct, toAcct, tokenId, amount):
         raise Exception('fromAcct does not have enough tokens')
     elif amount == fromBalance:
         Delete(GetContext(), approvedKey)
-        Delete(GetContext(), fromKey)
+        Delete(GetContext(), fromBalance - amount)
     else:
         Put(GetContext(), approvedKey, approvedAmount - amount)
         Put(GetContext(), fromKey, fromBalance - amount)
