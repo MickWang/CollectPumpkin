@@ -322,9 +322,9 @@ def transferFrom(spender, fromAcct, toAcct, tokenId, amount):
     approvedKey = concatkey(concatkey(concatkey(tokenId, APPROVE), fromAcct), spender)
     approvedAmount = Get(GetContext(), approvedKey)
 
-    if amount > fromBalance:
-        raise Exception('fromAcct does not have enough tokens')
-    elif amount == fromBalance:
+    if amount > approvedAmount:
+        raise Exception('you are not allowed to withdraw too many tokens')
+    elif amount == approvedAmount:
         Delete(GetContext(), approvedKey)
         Delete(GetContext(), fromBalance - amount)
     else:
